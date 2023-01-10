@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) =>{
         'User',
         {
             userid:{
-                type: DataTypes.STRING(30), // 글자수,,byte아님
+                type: DataTypes.STRING(30),
                 allowNull : false,
                 unique : true,
             },

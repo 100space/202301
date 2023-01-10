@@ -1,5 +1,5 @@
 const HttpException = require('./exceptions/HTTPException')
-require("dotenv").config({path : "/Users/baek/workspace/2023/230110/.env"})
+require("dotenv").config()
 
 
 const host = process.env.DB_HOST || "127.0.0.1"

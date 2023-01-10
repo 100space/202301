@@ -18,10 +18,9 @@ class userRepository {
         const user = await this.User.findOne({
             where:{
                 userid:userid,
-
             }
         })
-        console.dir(user,"1123123123")
+        console.dir(user)
         return user.dataValues;
     }
 }
