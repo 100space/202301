@@ -7,6 +7,7 @@
 
 const config = require("../config")
 //function으로 나오지만 class 임
+console.log(config)
 const Sequelize = require("sequelize")
 const env = config.env // development
 const db = config.db[env]
