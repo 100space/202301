@@ -17,6 +17,7 @@ class CommentRepository{
     async findAll(){
         try{
             const [list] = await this.mysql.query("select * from comment")
+            console.log(list,"reppo")
             return list
         }catch(e){
             throw new Error(e)

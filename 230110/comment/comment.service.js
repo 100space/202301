@@ -11,17 +11,20 @@
 
 
 class CommentService {
-    constructor({ commentRepository}){
+    constructor({ commentRepository,config}){
         this.commentRepository = commentRepository
+        this.config = config
+        this.HttpException = config.exception.HttpException
     }
 
     async list (){
         try{
             const list = await this.commentRepository.findAll()
-            if(list.length === 0 ) throw new Error("내용이 없음")
+            if(list.length === 0 ) throw new this.HttpException("내용이 없음")
+            console.log(list,"servie")
             return list
         }catch(e) {
-
+            throw new this.HttpException
         }
     }
 }

@@ -7,15 +7,16 @@
 // service.list().then((data)=>console.log(data))
 
 //===============================================================
-
+const config = require("../config")
 const mysql = require("../models")
 const CommentRepository = require('./comment.repository')
 const CommentService = require("./comment.service")
 const CommentController = require("./comment.controller")
+console.log(CommentController)
 
 const repository = new CommentRepository({mysql})
-const service = new CommentService({commentRepository : repository})
-const controller = new CommentController({commentService: service})
+const service = new CommentService({commentRepository : repository, config})
+const controller = new CommentController({commnetService: service})
 
 // repository.findAll().then((data)=>{
 //     console.log(data)
