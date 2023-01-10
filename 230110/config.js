@@ -11,14 +11,27 @@ const config = {
     exception :{
         HttpException,
     },
+    env: process.env.NODE_ENV || "development",
     port: process.env.PORT || 3000, 
     db:{
-        host,
-        port,
-        user,
-        password,
-        database
-    }
+        development:{
+            username: user,
+            password: password,
+            database: database,
+            port: port,
+            host:host,
+            dialect:"mysql"
+        },
+        test :{
+            username: user,
+            password: password,
+            database: database,
+            port: port,
+            host:host,
+            dialect:"mysql",
+            logging : false,
+        }
+    },
 }
 
 module.exports = config

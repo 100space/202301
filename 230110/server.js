@@ -4,6 +4,7 @@ const app = express()
 const config = require("./config")
 const HttpException = config.exception.HttpException
 const router = require("./routes")
+const {sequelize} = require("./models")
 
 app.use(express.json())
 app.use(router)
@@ -26,7 +27,8 @@ app.use((error, req, res, next)=>{
     
 })
 
-app.listen (config.port, () =>{
+app.listen (config.port, async() =>{
     //3001 포트를 이용하게 됨..
+    await sequelize.sync({force : true}) 
     console.log(`back server open `)
 })
