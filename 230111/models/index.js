@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize") // :class
+// console.log(Sequelize)
 const config = require("../config") 
 const db = config.db[config.env] //config.db.development
 
@@ -7,6 +8,14 @@ const db = config.db[config.env] //config.db.development
 const sequelize = new Sequelize(db.database, db.username, db.password, db)
 
 //user.models.js
+require('./user.model.js')(sequelize, Sequelize)
+require("./comment.model.js")(sequelize, Sequelize)
+
+//sequelize.model.User = {}
+
+//comment.
+//정적 메서드
+
 
 module.exports = {
     sequelize,
