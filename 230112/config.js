@@ -8,7 +8,7 @@ const config ={
         dialect:"mysql",
         define:{
             freezeTableName: true,
-            timestampos:false
+            timestamps:false
         },
     }
 }

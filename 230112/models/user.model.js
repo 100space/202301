@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) =>{
                 {
                     userid : {
                         type:Sequelize.STRING(30),
-                        primarykey : true
+                        primaryKey : true // 없으면 자동으로 id를 생성한다.
                     },
                     userpw:{
                         type:Sequelize.STRING(64),
@@ -23,6 +23,11 @@ module.exports = (sequelize, Sequelize) =>{
                     sequelize,
                 }
             )
+        }
+        static associate(models){
+            this.hasMany(models.Board,{
+                foreignKey:"userid",
+            })
         }
     }
 
