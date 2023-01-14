@@ -48,7 +48,11 @@ CREATE TABLE `Board` (
 
 ## sequelize-class를 이용한 테이블 만들기
 
-<!-- user.model.js || board.model.js -->
+</br>
+
+> user.model.js || board.model.js
+
+</br>
 
 Model.init()와 sequelize.define()는 같은 역할이다.
 Mode.init함수 안에는 2가지의 인자값이 필요하다.
@@ -150,6 +154,10 @@ ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint f
 자식 테이블에 부모 테이블과 관련된 내용이 있을 때 부모 테이블의 내용을 지울 수 없게 한다.
 
 아예 실행이 되지 않는다..
+</br>
+</br>
+</br>
+</br>
 
 ### 상황 4 : ON DELETE NOT NUll
 
@@ -157,11 +165,58 @@ ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint f
 부모의 데이터가 지워져도 자식의 데이터를 지우지 않아야하는 상황이있다..
 (ex: 리뷰...)
 부모 데이터(pk)를 지우면 자식테이블에 fk값에 NULL이 기입된 상태로 데이터가 남아 있다.
+</br>
+</br>
+</br>
+</br>
 
 **주의**
 NULL이 되면 NULL이 된 값의 데이터 조회할 때를 불러올 방법이 없다. 그래서 default를 줄 값이랑 fk를 줄 값을 줄 테이블을 잘 설계 해야한다..
 
+</br>
+</br>
+</br>
+</br>
+
 ## sequelize에서 외래키(foreign key) 지정하기
+
+</br>
+
+> user.model.js || board.model.js
+
+-   user.model.js
+
+```js
+static associate(models){
+    this.hasMany(models.Board, {
+        foreignKey:"userid"
+    })
+}
+```
+
+-   board.model.js
+
+```js
+static associate(models){
+            this.belongsTo(models.User, {
+                foreignKey:"userid"
+            })
+        }
+```
+
+-   선언한 static 함수 실행하기
+
+```js
+const { models } = sequelize
+// models.Board.associate(models)
+// models.User.associate(models)
+for (const key in models) {
+    if (typeof models[key].associate !== "function") continue
+    models[key].associate(models)
+}
+```
+
+</br>
 
 # JOIN : 테이블 두개의 내용을 합치기
 
