@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) =>{
             return this.init({
                 subject:{
                     type: Sequelize.STRING(100),
-                    allowNull: false,
+                    allowNull: false, 
                 },
                 content:{
                     type: Sequelize.TEXT,
@@ -21,7 +21,7 @@ module.exports = (sequelize, Sequelize) =>{
                 registerDate:{
                     type: Sequelize.DATE,
                     allowNull:false,
-                    defaultValue : Sequelize.fn("now"),
+                    defaultValue : Sequelize.fn("now"), 
                 },
                 hit:{
                     type:Sequelize.INTEGER,
@@ -29,10 +29,16 @@ module.exports = (sequelize, Sequelize) =>{
                 },
                 userid:{
                     type:Sequelize.STRING(100),
-                    allowNull:false, 
+                    allowNull:true, 
                 }, 
             },{
                 sequelize,
+            })
+        }
+        //fk설정하기
+        static associate(models){
+            this.belongsTo(models.User, {
+                foreignKey:"userid"
             })
         } 
     }
