@@ -1,4 +1,4 @@
-# MySQl
+# MySQL
 
 ## 제약 조건
 
@@ -104,7 +104,7 @@ ALTER TABLE `Board` DROP CONSTRAINT fk_board_userid;
 외래키 지정시에 ON DELETE를 같이 작성하여 준다.
 
 -   ON DELETE CASCADE
--   ON DELETE NO ACTION
+-   ON DELETE SET NULL
 -   ON DELETE RESTRICT
 
 ```sql
@@ -112,7 +112,7 @@ ALTER TABLE `Board`
     ADD CONSTRAINT fk_board_userid
     FOREIGN KEY(userid)
     REFERENCES User(userid)
-    ON DELETE CASCADE || SETNULL || RESTRICT
+    ON DELETE CASCADE || SET NULL || RESTRICT
 ```
 
 ### 상황 1 : 제약사항은 테이블을 만들 때 구상해서 미리 설정해야한다.
@@ -159,7 +159,7 @@ ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint f
 </br>
 </br>
 
-### 상황 4 : ON DELETE NOT NUll
+### 상황 4 : ON DELETE SET NULL
 
 **자식테이블에서 fk가 NOT NULL이면 안됨..**
 부모의 데이터가 지워져도 자식의 데이터를 지우지 않아야하는 상황이있다..
@@ -198,10 +198,10 @@ static associate(models){
 
 ```js
 static associate(models){
-            this.belongsTo(models.User, {
-                foreignKey:"userid"
-            })
-        }
+    this.belongsTo(models.User, {
+        foreignKey:"userid"
+    })
+}
 ```
 
 -   선언한 static 함수 실행하기
