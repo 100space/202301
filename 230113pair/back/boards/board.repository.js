@@ -9,22 +9,19 @@ class BoardRepository{
     }
     async findAll(){
         try{
-            const query = `SELECT
+            const query = `SELECT 
             A.boardid,
-            A.userid,
-            A.subject,
-            A.createdAt,
-            A.hit,
-            COUNT(C.boardid) AS commentCount,
-            COUNT(D.boardid) AS likeCount
-            FROM Board AS A
-            LEFT JOIN Comment AS C
-            ON A.boardid = C.boardid
-            LEFT JOIN Likes AS D
-            ON A.boardid = D.boardid
-            GROUP BY A.boardid
-            ORDER BY A.boardid DESC;
-            `
+            A.userid, 
+            B.username, 
+            A.subject, 
+            A.createdAt, 
+            A.hit, 
+            (SELECT COUNT(boardid) FROM Comments WHERE boardid = A.boardid) AS commentCount, 
+            (SELECT COUNT(boardid) FROM Likes WHERE boardid = A.boardid) AS likeCount 
+            FROM Boards AS A 
+            JOIN Users AS B 
+            ON A.userid = B.userid 
+            ORDER BY A.boardid DESC;`
             const [findAll] = await this.sequelize.query(query);
             return findAll
         }catch(e){
