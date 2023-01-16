@@ -1,0 +1,21 @@
+{
+  "name": "230116-2",
+  "version": "1.0.0",
+  "description": "기본적으로 PK는 테이블당 1개만 부여 가능하다고 알고 있다.",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "exlint": "^0.1.6",
+    "express": "^4.18.2",
+    "mysql2": "^3.0.1",
+    "sequelize": "^6.28.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.32.0"
+  }
+}
