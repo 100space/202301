@@ -60,12 +60,13 @@ for(const key in models) {
     console.log(req)
     
     const {hashtag, ...rest} = req.body
+    console.log(req.body,"durldurl")
     
     //1. Board테이블에 insert
-    const board = await Board.create(rest)
+    const board = await Board.create(rest) // subject, content를 이용하여 create
     
     //찾고 없으면 insert
-    // const insert1 = await Hash.findOrCreate({where : {tag:"#javascript"}})
+    // const insert1 = await Hash.findOrCreate({where : {tag:"#javascript"}}) // Hash 테이블에서 찾고 없으면 create
     // const insert2 = await Hash.findOrCreate({where : {tag:"#javascript"}})
     
     // forEach는 하나씩 넣어주기 때문에 10초짜리가 3개있으면 30초가 걸림
