@@ -22,6 +22,7 @@ const headerString = JSON.stringify(header)
 console.log(headerString)
 
 const buf2 = Buffer.from(headerString).toString("base64")
+console.log(buf2)
 // console.log(buf2) // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 //base64를 객체로 만들 줄 알아야한다.
@@ -35,7 +36,7 @@ const json = Buffer.from("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9", "base64").toStr
 //1byte -> 8bit -> 2Nible
 const salt = process.env.SALT || "web7722"
 const hash = crypto.createHmac("sha256", salt).update(buf2).digest("hex") //정적메서드...
-console.log(hash)
+console.log(hash,333333)
 console.log(hash.length)
 
 //평문이 있으면 hash  
