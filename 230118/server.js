@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000
 
 
 app.listen(3000, async()=>{
-    await sequelize.sync({force : false})
+    await sequelize.sync({force : true})
     console.log(`Dababase Connected...`)
     console.log(`Running on http://127.0.0.1:3000`)    
 })

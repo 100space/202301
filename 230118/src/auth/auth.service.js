@@ -10,13 +10,13 @@ class Auth{
     async token({userid, userpw}){
         try{
             if(!userid || !userpw) throw "회원정보를 찾을 수 없음"
-            const hash = this.crypto.createHmac("sha256", "web7722").update(userpw).digest("hex")
-            const user = await this.authRepository.getUserByInfo({userid, userpw : hash})
-            
+            // const hash = this.crypto.createHmac("sha256", "web7722").update(userpw).digest("hex")
+            // console.log(hash , "cont")
+            const user = await this.authRepository.getUserByInfo({userid,userpw})
             //user가 존재하는지 안하는지 확인하고
             //존재하면 token 생성
 
-            if(!user) return "아이디와 패스워드가 일치하지 않습니다."
+            if(!user) throw "아이디와 패스워드가 일치하지 않습니다."
             const token = this.jwt.sign(user)
             return token
         }catch(e){
