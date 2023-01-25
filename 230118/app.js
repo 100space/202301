@@ -80,9 +80,7 @@ app.get('/oauth/kakao', async (req, res, next) =>{
         })
         console.log(result)
         console.log(result.data.token)
-        // res.cookie ('token',result.data.token)
         res.redirect("http://127.0.0.1:3005")
-        //우리 형태의 토큰으로 재발급
     }catch(e){
         
     }

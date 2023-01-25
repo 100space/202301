@@ -1,25 +1,26 @@
-class UserRepository{
-    constructor({User}){
+class UserRepository {
+    constructor({ User }) {
         this.User = User
     }
-    async addUser(payload){
-        try{
-            const user = await this.User.create(payload, {raw:true})
+    async addUser(payload) {
+        try {
+            const user = await this.User.create(payload, { raw: true })
+            console.log(user)
             return user
-        }catch(e){
+        } catch (e) {
             throw new Error(e)
         }
     }
-    async getUserById (userid) {
-        try{
+    async getUserById(userid) {
+        try {
             const user = await this.User.findOne({
-                raw:true,
-                where:{
+                raw: true,
+                where: {
                     userid,
                 },
             })
             return user
-        }catch(e){
+        } catch (e) {
             throw new Error(e)
         }
     }

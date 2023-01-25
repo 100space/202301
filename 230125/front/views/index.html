@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <form id="frm">
+            <input type="text" name="subject" id="" />
+            <input type="file" name="upload" id="" />
+            <button type="submit">전송</button>
+        </form>
+        <script type="text/javascript">
+            const frm = document.querySelector("#frm")
+            frm.addEventListener("submit", async (e) => {
+                e.preventDefault()
+                // const { subject, upload } = e.target
+                const body = new FormData(e.target) // 바디영역을 만들어주는 JS내장기능
+                body.append("name", "baek") //추가로 넣고 싶은 내용..
+                const response = await axios.post(
+                    "http://127.0.0.1:3000/single",
+                    body,
+                    {
+                        headers: {
+                            ["Content-type"]: "multipart/form-data", // 필수...
+                        },
+                    }
+                )
+                console.log(response)
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h2>업로드</h2>
+        <form method="post" action="/uploads" enctype="multipart/form-data">
+            <ul>
+                <li>
+                    <input type="text" name="subject" />
+                </li>
+                <li>
+                    <input type="file" name="upload1" />
+                    <input type="file" name="upload2" />
+                    <input type="file" name="upload3" />
+                    <input type="file" name="upload4" />
+                </li>
+                <li>
+                    <button type="submit">전송</button>
+                </li>
+            </ul>
+        </form>
+    </body>
+</html>

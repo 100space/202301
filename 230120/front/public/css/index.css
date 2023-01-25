@@ -1,0 +1,37 @@
+*{
+    margin: 0 ;
+    padding: 0 ;
+}
+html{
+    font-size: 62.5%;
+}
+
+a{
+    text-decoration: none;
+    color: initial;
+}
+
+ul, li {
+    list-style: none;
+}
+
+
+h1{
+    font-size: 10rem;
+}
+.bwflex { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btnpadding{
+    padding: 7px 14px;
+}
+#gnb > ul > li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 13rem;
+    height: 5rem;
+    font-size: 2rem;
+}
