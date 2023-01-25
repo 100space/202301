@@ -12,6 +12,7 @@ nunjuncks.configure("views", {
 app.use(cors())
 app.use(express.json()) // req.body를 만들어줌
 app.use(express.urlencoded({ extended: false })) // req.body를 만들어줌
+app.use(express.static("uploads"))
 
 app.use((req, res, next) => {
     //content-type

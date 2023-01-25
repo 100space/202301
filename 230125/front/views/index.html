@@ -6,30 +6,67 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <style>
+            html {
+                width: 100%;
+                height: 100%;
+            }
+            .img_input {
+                display: none;
+            }
+            #img {
+                width: 200px;
+                height: 200px;
+                border-radius: 100px;
+            }
+        </style>
     </head>
     <body>
         <form id="frm">
-            <input type="text" name="subject" id="" />
-            <input type="file" name="upload" id="" />
+            <div id="img">
+                <img id="image" src="#" alt="" />
+                <input type="file" name="upload" class="img_input" id="img_input" />
+            </div>
+            <input type="text" name="subject" />
             <button type="submit">전송</button>
         </form>
+
         <script type="text/javascript">
+            const imgInput = document.querySelector("#img_input")
+            const imageFile = document.querySelector("#image")
+            const img = document.querySelector("#img")
             const frm = document.querySelector("#frm")
+
+            img.addEventListener("click", (e) => {
+                console.log(e.target)
+                imgInput.classList.toggle("img_input")
+            })
+
+            imgInput.addEventListener("change", () => {
+                const preview = new FileReader()
+                preview.readAsDataURL(imgInput.files[0]) // 이게 result를 만들어준다..?  이게 없으면 onload의 result가 없고, 그래서 화면에 안그려짐..
+                console.log(typeof imgInput.files[0])
+                console.log(preview)
+                preview.onload = () => {
+                    imageFile.src = preview.result
+                    console.log(preview.result)
+                    imageFile.style = "height :100%; width :100%"
+                }
+            })
+
             frm.addEventListener("submit", async (e) => {
                 e.preventDefault()
                 // const { subject, upload } = e.target
                 const body = new FormData(e.target) // 바디영역을 만들어주는 JS내장기능
                 body.append("name", "baek") //추가로 넣고 싶은 내용..
-                const response = await axios.post(
-                    "http://127.0.0.1:3000/single",
-                    body,
-                    {
-                        headers: {
-                            ["Content-type"]: "multipart/form-data", // 필수...
-                        },
-                    }
-                )
+                const response = await axios.post("http://127.0.0.1:3000/single", body, {
+                    headers: {
+                        ["Content-type"]: "multipart/form-data", // 필수...
+                    },
+                })
+
                 console.log(response)
+                location.href = "/"
             })
         </script>
     </body>
