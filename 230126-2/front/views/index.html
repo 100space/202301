@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .right {
+                text-align: right;
+            }
+            form {
+                position: absolute;
+                bottom: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <ul id="chat"></ul>
+        <form id="frm">
+            <input type="text" name="message" />
+            <button type="submit">전송</button>
+        </form>
+        <script type="text/javascript">
+            const socket = new WebSocket("ws://127.0.0.1:3000")
+            const chat = document.querySelector("#chat")
+
+            socket.addEventListener("message", (e) => {
+                console.log(`서버에서 받은 메세지 : ${e.data}`)
+                const li = document.createElement("li")
+                li.innerHTML = e.data
+                chat.append(li)
+            })
+            const frm = document.querySelector("#frm")
+            frm.addEventListener("submit", (e) => {
+                e.preventDefault()
+                const { message } = e.target
+                socket.send(message.value)
+
+                const li = document.querySelector("li")
+                li.classList.add("right")
+                li.innerHTML = message.value
+                chat.append(li)
+
+                e.target.reset()
+                message.focus()
+            })
+        </script>
+    </body>
+</html>
