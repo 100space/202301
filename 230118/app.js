@@ -32,7 +32,7 @@ const CLIENT_SECRET = `VXsHPy3ZQNeftLch0cd0fS78pefVJYIH`
 app.get("/oauth/kakao", async (req, res, next) => {
     // step2. 토큰 받기
     const { code } = req.query
-
+    // console.log(code)
     //서비스 로직 시작
     const host = `${HOST}/oauth/token`
     const header = {
@@ -61,6 +61,8 @@ app.get("/oauth/kakao", async (req, res, next) => {
                 Authorization: `Bearer ${access_token}`,
             },
         })
+        console.log(user)
+
         const sns = {
             userid: user.data.id,
             userpw: user.data.id,
@@ -73,16 +75,16 @@ app.get("/oauth/kakao", async (req, res, next) => {
             defaults: sns,
         }) // 만들어짐.
         const { userid, userpw } = snsCreate.dataValues
-        const body = { userid, userpw }
-        const result = await axios.post("http://127.0.0.1:3000/auth", body, {
+        const bodys = { userid, userpw }
+        const result = await axios.post("http://127.0.0.1:3000/auth", bodys, {
             headers: {
                 "Content-type": "application/json",
             },
         })
         console.log(result)
-        console.log(result.data.token)
-        res.redirect("http://127.0.0.1:3005")
+        // console.log(result.data.token)
     } catch (e) {}
+    res.redirect("http://127.0.0.1:3005/")
     //
 })
 
