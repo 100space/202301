@@ -10,27 +10,28 @@
             .right {
                 text-align: right;
             }
+            form {
+                position: absolute;
+                bottom: 100px;
+            }
         </style>
     </head>
     <body>
+        <ul id="chat"></ul>
         <form id="frm">
             <input type="text" name="message" />
             <button type="submit">전송</button>
         </form>
-        <ul id="chat"></ul>
-
         <script type="text/javascript">
-            const chat = document.querySelector("#chat")
             const socket = io.connect("http://127.0.0.1:3000", {
-                // "polling방식"
                 path: "/socket.io",
-                transports: ["websocket"], //websocket 으로만 하겠다
+                transports: ["websocket"],
             })
+            const chat = document.querySelector("#chat")
 
             socket.on("reply", (data) => {
                 const json = JSON.parse(data)
                 const li = document.createElement("li")
-                // li.innerHTML = data
                 li.innerHTML = json.data + " " + json.userid
                 chat.append(li)
             })
@@ -39,10 +40,8 @@
             frm.addEventListener("submit", (e) => {
                 e.preventDefault()
                 const { message } = e.target
-                //cookie 를 확인하고 , 로그인한 사람인지 아닌지
-                //로그인 한사람의 정보를 받아와서 정보를 받아서 처리
-                // socket.send(message.value)
-                socket.emit("data", message.value) // 첫번째 인자값: 데이터명
+
+                socket.emit("data", message.value)
                 const li = document.createElement("li")
                 li.classList.add("right")
                 li.innerHTML = message.value
